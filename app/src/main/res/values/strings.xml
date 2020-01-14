@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TP1</string>
+    <string name="searchHint">Quebec, Montreal,...</string>
+</resources>
