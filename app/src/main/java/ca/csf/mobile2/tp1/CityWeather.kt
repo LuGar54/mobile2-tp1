@@ -1,13 +1,22 @@
 package ca.csf.mobile2.tp1
 
-import org.json.JSONObject
+import com.fasterxml.jackson.module.kotlin.*
 
-class CityWeather(){
+data class CityWeather(val json: String) {
 
     var city: String = ""
     var type: String = ""
     var temperatureInCelsius: Int = 0
 
+    init {
 
+        val mapper = jacksonObjectMapper()
 
+        val cityWeather: CityWeather = mapper.readValue(json)
+
+        city = cityWeather.city
+        type = cityWeather.type
+        temperatureInCelsius = cityWeather.temperatureInCelsius
+
+    }
 }

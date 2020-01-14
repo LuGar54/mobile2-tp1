@@ -16,6 +16,13 @@
         android:drawableStart="@drawable/ic_search"
         android:hint="@string/searchHint"/>
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/weatherGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:constraint_referenced_ids="temperature,weatherType,city"/>
+
     <TextView
         android:id="@+id/temperature"
         android:layout_width="wrap_content"
@@ -46,6 +53,34 @@
         android:text="Quebec"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/temperature"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/errorGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:constraint_referenced_ids="umbrella,errorText"/>
+
+    <ImageView
+        android:id="@+id/umbrella"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_umbrella"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/errorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="error"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/umbrella"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
