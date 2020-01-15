@@ -11,8 +11,8 @@ import java.net.HttpURLConnection
 
 class FetchWeatherAsyncTask(
     val onSuccess: OnSuccess,
-    val onError: OnError)
-    : AsyncTask<String, Unit, Promise<CityWeather, NetworkError>>() {
+    val onError: OnError
+) : AsyncTask<String, Unit, Promise<CityWeather, NetworkError>>() {
 
     private val WEB_SERVICE_URL = "http://localhost:8080/api/v1/weather/"
 
@@ -43,8 +43,16 @@ class FetchWeatherAsyncTask(
         }
     }
 
+    override fun onPostExecute(promise: Promise<CityWeather, NetworkError>) {
+        if (promise.isSuccessful) {
+            onSuccess(promise.result!!)
+        } else {
+            onError(promise.error!!)
+        }
+    }
+
 }
 
 typealias OnSuccess = (CityWeather) -> Unit
 
-typealias OnError = () -> Unit
+typealias OnError = (NetworkError) -> Unit
