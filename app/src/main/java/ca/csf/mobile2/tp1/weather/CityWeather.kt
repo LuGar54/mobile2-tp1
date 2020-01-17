@@ -6,9 +6,9 @@ import android.os.Parcelable
 data class CityWeather(val city: String, val temperatureInCelsius: Int, val type: String) : Parcelable {
 
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
+        parcel.readString()!!,
         parcel.readInt(),
-        parcel.readString()
+        parcel.readString()!!
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

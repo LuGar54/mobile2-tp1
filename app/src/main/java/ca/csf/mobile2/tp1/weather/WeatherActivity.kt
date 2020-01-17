@@ -27,6 +27,7 @@ class WeatherActivity : AppCompatActivity() {
         NetworkError.SERVER to R.string.server_error
     )
 
+    private var searching = false
     private var weather: CityWeather? = null
     private var error: NetworkError? = null
 
@@ -46,6 +47,7 @@ class WeatherActivity : AppCompatActivity() {
         val hasWeather = weather != null
         val hasError = error != null
 
+        outState.putBoolean(IS_SEARCHING, searching)
         outState.putBoolean(HAS_WEATHER, hasWeather)
         outState.putBoolean(HAS_ERROR, hasError)
 
@@ -64,6 +66,11 @@ class WeatherActivity : AppCompatActivity() {
         val hasWeather = savedInstanceState.getBoolean(HAS_WEATHER)
         val hasError = savedInstanceState.getBoolean(HAS_ERROR)
 
+        if(savedInstanceState.getBoolean(IS_SEARCHING)) {
+            onSubmit()
+            return
+        }
+
         if (hasWeather) {
             showWeatherScreen(savedInstanceState.getParcelable(WEATHER)!!)
         } else if (hasError) {
@@ -79,6 +86,8 @@ class WeatherActivity : AppCompatActivity() {
         errorGroup.hide()
         progressBar.show()
 
+        searching = true
+
         //https://stackoverflow.com/questions/1109022/close-hide-android-soft-keyboard
         val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(searchBar.windowToken, 0)
@@ -90,6 +99,7 @@ class WeatherActivity : AppCompatActivity() {
         progressBar.hide()
         weatherGroup.show()
 
+        searching = false
         weather = cityWeather
         temperature.text = String.format(getString(R.string.degrees), cityWeather.temperatureInCelsius)
         weatherType.setImageResource(weatherIcons[cityWeather.type] ?: error("Missing weather icon"))
@@ -100,11 +110,13 @@ class WeatherActivity : AppCompatActivity() {
         progressBar.hide()
         errorGroup.show()
 
+        searching = false
         error = networkError
         errorText.text = getString(errorMessages[networkError] ?: error("Missing network error type"))
     }
 }
 
+private const val IS_SEARCHING = "IS_SEARCHING"
 private const val SEARCH = "SEARCH"
 private const val HAS_WEATHER = "HAS_WEATHER"
 private const val HAS_ERROR = "HAS_ERROR"
