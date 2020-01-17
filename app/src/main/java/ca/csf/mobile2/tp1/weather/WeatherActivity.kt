@@ -35,8 +35,8 @@ class WeatherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather)
 
-        searchBar.onSubmit { onSubmit() }
-        retryButton.setOnClickListener { onSubmit() }
+        searchBar.onSubmit { fetchWeather() }
+        retryButton.setOnClickListener { fetchWeather() }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -67,7 +67,7 @@ class WeatherActivity : AppCompatActivity() {
         val hasError = savedInstanceState.getBoolean(HAS_ERROR)
 
         if(savedInstanceState.getBoolean(IS_SEARCHING)) {
-            onSubmit()
+            fetchWeather()
             return
         }
 
@@ -78,7 +78,7 @@ class WeatherActivity : AppCompatActivity() {
         }
     }
 
-    private fun onSubmit() {
+    private fun fetchWeather() {
         if (searchBar.text.isBlank())
             return
 
