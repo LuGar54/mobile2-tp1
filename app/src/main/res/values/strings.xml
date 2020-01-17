@@ -1,5 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">TP1</string>
-    <string name="searchHint">Quebec, Montreal,...</string>
+    <string name="search_hint">Quebec, Montreal,…</string>
     <string name="search">Search</string>
+    <string name="connect_error">Connectivity error</string>
+    <string name="not_found">404 not found</string>
+    <string name="server_error">Server error</string>
+    <string name="retry">RETRY</string>
+    <string name="degrees" translatable="false">%d°</string>
+    <string name="weather">Weather</string>
+    <string name="umbrella">Umbrella</string>
 </resources>

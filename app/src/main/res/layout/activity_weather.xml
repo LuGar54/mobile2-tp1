@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".weather.WeatherActivity">
 
     <EditText
         android:id="@+id/searchBar"
@@ -15,8 +15,19 @@
         app:layout_constraintTop_toTopOf="parent"
         android:drawableStart="@drawable/ic_search"
         android:imeActionLabel="@string/search"
+        android:inputType="text"
         android:maxLines="1"
-        android:hint="@string/searchHint"/>
+        android:hint="@string/search_hint"/>
+    
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="invisible"/>
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/weatherGroup"
@@ -29,7 +40,6 @@
         android:id="@+id/temperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="15"
         android:textSize="64sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,21 +48,19 @@
 
     <ImageView
         android:id="@+id/weatherType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleX="5"
-        android:scaleY="5"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         app:srcCompat="@drawable/ic_cloudy"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/temperature"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:contentDescription="@string/weather" />
 
     <TextView
         android:id="@+id/city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quebec"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/temperature"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -64,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
-        app:constraint_referenced_ids="umbrella,errorText"/>
+        app:constraint_referenced_ids="umbrella,errorText,retryButton"/>
 
     <ImageView
         android:id="@+id/umbrella"
@@ -74,15 +82,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:contentDescription="@string/umbrella" />
 
     <TextView
         android:id="@+id/errorText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="error"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/umbrella"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/retryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/retry"
+        app:layout_constraintTop_toBottomOf="@+id/errorText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
