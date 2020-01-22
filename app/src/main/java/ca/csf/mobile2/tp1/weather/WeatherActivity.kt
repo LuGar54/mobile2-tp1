@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_weather.*
 
 class WeatherActivity : AppCompatActivity() {
 
+    //BC : Devrait en dehors de cette classe.
     private val weatherIcons = mapOf(
         "RAIN" to R.drawable.ic_rain,
         "SUNNY" to R.drawable.ic_sunny,
@@ -21,6 +22,7 @@ class WeatherActivity : AppCompatActivity() {
         "SNOW" to R.drawable.ic_snow
     )
 
+    //BC : Idem.
     private val errorMessages = mapOf(
         NetworkError.CONNECTIVITY to R.string.connect_error,
         NetworkError.NOT_FOUND to R.string.not_found,
@@ -88,6 +90,8 @@ class WeatherActivity : AppCompatActivity() {
 
         searching = true
 
+        //BC : Ces deux lignes devrait être dans leur propre méthode.
+        //     Aussi, nommage.
         //https://stackoverflow.com/questions/1109022/close-hide-android-soft-keyboard
         val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(searchBar.windowToken, 0)

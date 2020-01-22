@@ -16,7 +16,8 @@ class FetchWeatherAsyncTask(
     val onError: OnError
 ) : AsyncTask<String, Unit, Promise<CityWeather, NetworkError>>() {
 
-    private val WEB_SERVICE_URL = "http://10.0.75.1:8080/api/v1/weather/"
+    //BC : Ceci n'est pas une constante.
+    private val WEB_SERVICE_URL = "http://192.168.1.164:8080/api/v1/weather/"
 
     override fun doInBackground(vararg params: String): Promise<CityWeather, NetworkError> {
 
